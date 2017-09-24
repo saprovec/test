@@ -1,0 +1,20 @@
+.error {
+  border-color: #DC7F7F !important;
+  box-shadow: 0 0 6px 2px #DC7F7F inset;
+}
+.correctly {
+  border-color: #74dc53 !important;
+  box-shadow: 0 0 6px 2px #74dc53 inset;
+}
+.error-message{
+  display: none;
+}
+.success-message {
+  display: none;
+}
+.mark::after {
+  content: ' *';
+}
+.alert{
+  display: none;
+}

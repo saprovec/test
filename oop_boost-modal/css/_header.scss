@@ -1,0 +1,45 @@
+header{
+  background-color: #dcdcdc;
+  min-height: 230px;
+  padding: 60px 0;
+}
+.header-contacts {
+  font-size: 34px;
+  line-height: 1.15;
+  color: #767676;
+  a {
+    font-weight: bold;
+    text-decoration: none !important;
+    color: #767676;
+    font-size: 24px;
+    border-bottom: 2px dashed #767676;
+  }
+}
+.logo{
+  width: 279px;
+  height: 100px;
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+  }
+  a {
+    width: 161px;
+    display: inline-block;
+    text-decoration: none !important;
+    color: #777777;
+    margin-left: 10px;
+    vertical-align: middle;
+    span.name {
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 20px;
+    }
+    span.description {
+      font-size: 14px;
+      display: block;
+      margin-top: 15px;
+    }
+  }
+}

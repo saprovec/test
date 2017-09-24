@@ -1,0 +1,23 @@
+nav { background-color: #767676; }
+.nav {
+  height: 80px;
+  position: relative;
+  background-color: #767676;
+  ul {
+    margin: 16px auto 0 auto;
+    font-size: 30px;
+    float: left;
+    li{
+      float: left;
+      list-style: none;
+      border-left: 2px solid #FFFFFF;
+      a {
+        color: #FFFFFF;
+        margin: 0 23px;
+        text-decoration: none;
+        &:hover { border-bottom: 2px solid #FFFFFF; }
+      }
+      &:first-child { border-left: none; }
+    }
+  }
+}
