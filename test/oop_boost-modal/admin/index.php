@@ -10,7 +10,7 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-include __DIR__ .'/classes/Admin.php';
+include '../classes/Admin.php';
 
 $error = '';
 
@@ -27,7 +27,7 @@ if(isset($_POST['login']) && isset($_POST['psswd'])) {
             'cookie_lifetime' => 86400,
         ]);
         $_SESSION['info'] = $result;
-        header("Location: admin_work.php");
+        header("Location: work.php");
         exit;
     }
     else {
@@ -45,7 +45,7 @@ if(isset($_POST['login']) && isset($_POST['psswd'])) {
 </head>
 <body>
 <div class="container">
-    <form class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4 mx-auto mt-5" action="admin_login.php" method="post">
+    <form class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4 mx-auto mt-5" action="index.php" method="post">
         <div class="form-group">
             <label for="login">Логин</label>
             <input type="text" class="form-control" id="login" placeholder="Логин" name="login" value="">

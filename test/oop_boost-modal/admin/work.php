@@ -9,7 +9,7 @@ session_start([
 
 if(isset($_POST['reset'])){
     session_destroy();
-    header("Location: admin_login.php");
+    header("Location: index.php");
     exit;
 }
 
@@ -18,7 +18,7 @@ if (!isset($_SESSION['info']['id']))
     exit('<strong>Ошибка!</strong> Доступ закрыт.');
 }
 
-include __DIR__.'/classes/Admin.php';
+include '../classes/Admin.php';
 
 $array_get = $_GET;
 unset($_GET);
@@ -41,7 +41,7 @@ $pageCount = Admin::getPageCount($result,$init_array['limit']);
 <body>
 <nav class="navbar navbar-inverse bg-primary">
     <h4 class="mb-0"><span class="badge badge-success">Администрирование</span></h4>
-    <form class="form-inline" action="admin_work.php" method="post">
+    <form class="form-inline" action="work.php" method="post">
         <div class="d-flex justify-content-end">
             <div class="p-2"><span class="badge badge-pill badge-secondary">Имя: <?=$_SESSION['info']['user_name']?></span></div>
             <div class="p-2"><span class="badge badge-pill badge-secondary">Логтн: <?=$_SESSION['info']['user_login']?></span></div>
@@ -53,7 +53,7 @@ $pageCount = Admin::getPageCount($result,$init_array['limit']);
 <div class="container">
     <div class="admin">
         <div class="table-search">
-            <form action="admin_work.php" class="form-inline m-4" method="get">
+            <form action="work.php" class="form-inline m-4" method="get">
                 <label class="mr-2" for="search_id">ID:</label>
                 <input type="text" class="form-control col-1 mr-5" id="search_id" name="id" value="<?=$init_array['id']?>" placeholder="ID">
                 <label class="mr-2" for="search_name">Имя:</label>
@@ -61,16 +61,16 @@ $pageCount = Admin::getPageCount($result,$init_array['limit']);
                 <label class="mr-2" for="search_date">Дата:</label>
                 <input type="text" class="form-control col-2 mr-5" id="search_date" name="date" value="<?=$init_array['date']?>" placeholder="ГГ-мм-мм чч:мм:сс">
                 <button type="submit" class="btn btn-primary mr-5">ИСКАТЬ</button>
-                <button type="button" onclick="location.href='admin_work.php'" class="btn btn-primary">СБРОСИТЬ</button>
+                <button type="button" onclick="location.href='work.php'" class="btn btn-primary">СБРОСИТЬ</button>
             </form>
         </div>
         <div class="table">
             <table class='table table-striped'>
                 <thead><tr>
-                    <th><a href="admin_work.php?interval=<?=$init_array['interval']?>&column=id<?=($init_array['column'] === 'id' && $init_array['search'] === 'ASC') ? '&search=DESC' : '&search=ASC'?><?=$init_array['column_str']?>">№</a><?=Admin::getClassSort('id',$init_array['column'],$init_array['search'])?></th>
-                    <th><a href="admin_work.php?interval=<?=$init_array['interval']?>&column=name<?=($init_array['column'] === 'name' && $init_array['search'] === 'ASC') ? '&search=DESC' : '&search=ASC'?><?=$init_array['column_str']?>">Имя</a><?=Admin::getClassSort('name',$init_array['column'],$init_array['search'])?></th>
+                    <th><a href="work.php?interval=<?=$init_array['interval']?>&column=id<?=($init_array['column'] === 'id' && $init_array['search'] === 'ASC') ? '&search=DESC' : '&search=ASC'?><?=$init_array['column_str']?>">№</a><?=Admin::getClassSort('id',$init_array['column'],$init_array['search'])?></th>
+                    <th><a href="work.php?interval=<?=$init_array['interval']?>&column=name<?=($init_array['column'] === 'name' && $init_array['search'] === 'ASC') ? '&search=DESC' : '&search=ASC'?><?=$init_array['column_str']?>">Имя</a><?=Admin::getClassSort('name',$init_array['column'],$init_array['search'])?></th>
                     <th>Телефон</th><th>Email</th><th>Сообщение</th>
-                    <th><a href="admin_work.php?interval=<?=$init_array['interval']?>&column=date<?=($init_array['column'] === 'date' && $init_array['search'] === 'ASC') ? '&search=DESC' : '&search=ASC'?><?=$init_array['column_str']?>">Дата</a><?=Admin::getClassSort('date',$init_array['column'],$init_array['search'])?></th>
+                    <th><a href="work.php?interval=<?=$init_array['interval']?>&column=date<?=($init_array['column'] === 'date' && $init_array['search'] === 'ASC') ? '&search=DESC' : '&search=ASC'?><?=$init_array['column_str']?>">Дата</a><?=Admin::getClassSort('date',$init_array['column'],$init_array['search'])?></th>
                 </tr></thead>
                 <tbody>
                 <?php
@@ -85,25 +85,25 @@ $pageCount = Admin::getPageCount($result,$init_array['limit']);
     <div class="mt-5">
         <nav aria-label="">
             <ul class="pagination justify-content-center">
-            <?php
-            if($init_array['interval'] == 0){
-                echo '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Назад</a></li>';
-            }else{
-                echo '<li class="page-item"><a class="page-link" href="admin_work.php?interval='.($init_array['interval']-1).$init_array['result_str'].'">Назад</a></li>';
-            }
-            for($i=0; $i<$pageCount; $i++) {
-                if($init_array['interval'] == $i){
-                    echo '<li class="page-item active"><a class="page-link" href="#">'.($i+1).'</a></li>';
-                }else {
-                    echo '<li class="page-item"><a class="page-link" href="admin_work.php?interval='.$i.$init_array['result_str'].'" title="'.($i+1).'">'.($i+1).'</a></li>';
+                <?php
+                if($init_array['interval'] == 0){
+                    echo '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Назад</a></li>';
+                }else{
+                    echo '<li class="page-item"><a class="page-link" href="work.php?interval='.($init_array['interval']-1).$init_array['result_str'].'">Назад</a></li>';
                 }
-            }
-            if($init_array['interval'] == ($pageCount-1)){
-                echo '<li class="page-item disabled"><a class="page-link" href="#">Вперед</a></li>';
-            }else{
-                echo '<li class="page-item"><a class="page-link" href="admin_work.php?interval='.($init_array['interval']+1).$init_array['result_str'].'">Вперед</a></li>';
-            }
-            ?>
+                for($i=0; $i<$pageCount; $i++) {
+                    if($init_array['interval'] == $i){
+                        echo '<li class="page-item active"><a class="page-link" href="#">'.($i+1).'</a></li>';
+                    }else {
+                        echo '<li class="page-item"><a class="page-link" href="work.php?interval='.$i.$init_array['result_str'].'" title="'.($i+1).'">'.($i+1).'</a></li>';
+                    }
+                }
+                if($init_array['interval'] == ($pageCount-1)){
+                    echo '<li class="page-item disabled"><a class="page-link" href="#">Вперед</a></li>';
+                }else{
+                    echo '<li class="page-item"><a class="page-link" href="work.php?interval='.($init_array['interval']+1).$init_array['result_str'].'">Вперед</a></li>';
+                }
+                ?>
             </ul>
         </nav>
     </div>
